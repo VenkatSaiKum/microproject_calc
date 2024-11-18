@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>calc</title>
+    <link rel="stylesheet" href="stylesc.css">
+</head>
+<body>
+    <div class="container">
+        <h1>calc</h1>
+        <div class="divinput">
+            <input type="text" class="input" placeholder="0" readonly>
+        </div>
+        <div class="btncontainer">
+            <div class="gridcontainer">
+                <input type="button"  class="button" value="7" onclick="Updateinput('7')">
+                <input type="button"  class="button" value="8" onclick="Updateinput('8')">
+                <input type="button"  class="button" value="9"onclick="Updateinput('9')">
+                <input type="button"  class="button" id="del" value="DEL" onclick="document.querySelector('.input').value = document.querySelector('.input').value.toString().slice(0,-1)">
+                <input type="button"  class="button" value="4" onclick="Updateinput('4')">
+                <input type="button"  class="button" value="5" onclick="Updateinput('5')">
+                <input type="button"  class="button" value="6" onclick="Updateinput('6')">
+                <input type="button"  class="button" value="+" onclick="Updateinput('+')">
+                <input type="button"  class="button" value="1" onclick="Updateinput('1')">
+                <input type="button"  class="button" value="2" onclick="Updateinput('2')">
+                <input type="button"  class="button" value="3" onclick="Updateinput('3')">
+                <input type="button"  class="button" value="-" onclick="Updateinput('-')">
+                <input type="button"  class="button" value="." onclick="Updateinput('.')">
+                <input type="button"  class="button" value="0" onclick="Updateinput('0')">
+                <input type="button"  class="button" value="/" onclick="Updateinput('/')">
+                <input type="button"  class="button" value="*" onclick="Updateinput('*')">
+            </div>
+            <div class="flexcontainer">
+                <input type="button"  class="button" id="reset" value="RESET" onclick="document.querySelector('.input').value='0'">
+                <input type="button"  class="button" id="equal" value="=" onclick="calculate()">
+            </div>
+
+        </div>
+    </div>
+    <script>
+        function Updateinput(value){
+            const inputField= document.querySelector('.input')
+            if(inputField.value=== '0' && value !== '.') {
+                inputField.value=value
+            }
+            else {
+                inputField.value +=value
+            }
+        }
+        function calculate() {
+            const inputField = document.querySelector('.input');
+            try{
+                let sanitizedInput = inputField.value.replace(/(^|[^.\d])0+(\d+)/g, '$1$2');
+                inputField.value = eval(sanitizedInput);
+            }
+            catch(error){
+                alert('invalid expression')
+                inputField.value='0'
+            }
+        }
+    </script>
+</body>
+</html>
